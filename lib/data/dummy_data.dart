@@ -15,7 +15,7 @@ final dummyProducts = [
       description: 'A nice pair of trousers.',
       price: 59.99,
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Trousers%2C_dress_%28AM_1960.022-8%29.jpg/512px-Trousers%2C_dress_%28AM_1960.022-8%29.jpg',
+          'https://clipart-library.com/image_gallery2/Trouser-PNG-Clipart.png',
     ),
     Product(
       id: 'p3',
@@ -31,6 +31,6 @@ final dummyProducts = [
       description: 'Prepare any meal you want.',
       price: 49.99,
       imageUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
+          'https://clipart-library.com/newhp/Pan-clipart-kid-2.jpeg',
     ),
   ];
