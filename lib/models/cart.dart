@@ -5,8 +5,9 @@ import 'package:shop_app/models/cart_item.dart';
 import 'package:shop_app/models/product.dart';
 
 class Cart with ChangeNotifier{
-  Map<String, CarItem> _items = {};
-  Map<String, CarItem> get items {
+  Map<String, CartItem> _items = {};
+
+  Map<String, CartItem> get items {
     return {..._items};
   }
 
@@ -18,7 +19,7 @@ class Cart with ChangeNotifier{
     if(_items.containsKey(product.id)){
         _items.update(
           product.id, 
-          (existingItem) => CarItem(
+          (existingItem) => CartItem(
             id: existingItem.id, 
             productId: existingItem.productId, 
             name: existingItem.name, 
@@ -27,8 +28,8 @@ class Cart with ChangeNotifier{
           ),
         );
     } else {
-      items.putIfAbsent(
-        product.id, () => CarItem(
+      _items.putIfAbsent(
+        product.id, () => CartItem(
           id: Random().nextDouble().toString(), 
           productId: product.id, 
           name: product.name, 
@@ -37,6 +38,7 @@ class Cart with ChangeNotifier{
         ),
       );
     }
+    notifyListeners();
   }
 
   double get totalAmount {

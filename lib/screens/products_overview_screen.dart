@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/utils/app_routes.dart';
 import 'package:shop_app/widgets/badgee.dart';
 import '../models/cart.dart';
 import '../models/product_list.dart';
@@ -19,8 +20,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final provider = Provider.of<ProductList>(context); //Controle GLOBAL do estado FAVORITO - Usando interface do tipo Statelees
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Minha Loja'),
@@ -52,7 +51,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           Consumer<Cart>(
             child: IconButton(
                 icon: Icon(Icons.shopping_cart),
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.of(context).pushNamed(AppRoutes.CART);
+                },
               ),
             builder: (ctx, cart, child) => Badgee(
               value: cart.itemsCount.toString(),
