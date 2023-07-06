@@ -8,12 +8,20 @@ enum FilterOptions{
   All
 }
 
-class ProductsOverviewScreen extends StatelessWidget {
+class ProductsOverviewScreen extends StatefulWidget {
   ProductsOverviewScreen({super.key});
 
   @override
+  State<ProductsOverviewScreen> createState() => _ProductsOverviewScreenState();
+}
+
+class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
+
+  bool _showFavoriteOnly = false;
+
+  @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ProductList>(context); //Controle GLOBAL do estado FAVORITO
+    // final provider = Provider.of<ProductList>(context); //Controle GLOBAL do estado FAVORITO - Usando interface do tipo Statelees
 
     return Scaffold(
       appBar: AppBar(
@@ -32,16 +40,22 @@ class ProductsOverviewScreen extends StatelessWidget {
               ),
             ],
             onSelected: (FilterOptions selectedValue){
-              if(selectedValue == FilterOptions.Favorite){
-                provider.showFavoriteOnly();
-              } else {
-                provider.showAll();
-              }
+              setState(() {
+                if(selectedValue == FilterOptions.Favorite){
+                  // provider.showFavoriteOnly(); //Controle GLOBAL do estado FAVORITO - Usando interface do tipo Statelees
+                  _showFavoriteOnly = true;
+                } else {
+                  // provider.showAll(); //Controle GLOBAL do estado FAVORITO - Usando interface do tipo Statelees
+                  _showFavoriteOnly = false;
+                }
+              });
+
+
             },
           ),
         ],
       ),
-      body: ProductGrid(),
+      body: ProductGrid(showFavoriteOnly: _showFavoriteOnly,),
     );
   }
 }

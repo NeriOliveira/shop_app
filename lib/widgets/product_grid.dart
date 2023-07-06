@@ -5,14 +5,18 @@ import '../models/product.dart';
 import '../models/product_list.dart';
 
 class ProductGrid extends StatelessWidget {
-  const ProductGrid({
+
+  final bool showFavoriteOnly; //Gerenciamento de estado LOCAL
+  const ProductGrid(
+    {
+    required this.showFavoriteOnly, //Gerenciamento de estado LOCAL
     super.key,
-  });
+    });
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ProductList>(context);
-    final List<Product> loadedProducts = provider.items;
+    final List<Product> loadedProducts = showFavoriteOnly ? provider.favoriteItems : provider.items; //Gerenciamento de estado LOCAL
 
     return GridView.builder(
       padding: EdgeInsets.all(10),
