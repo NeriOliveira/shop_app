@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/widgets/badgee.dart';
+import '../models/cart.dart';
 import '../models/product_list.dart';
 import '../widgets/product_grid.dart';
 
-enum FilterOptions{
-  Favorite,
-  All
-}
+enum FilterOptions { Favorite, All }
 
 class ProductsOverviewScreen extends StatefulWidget {
   ProductsOverviewScreen({super.key});
@@ -16,7 +15,6 @@ class ProductsOverviewScreen extends StatefulWidget {
 }
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
-
   bool _showFavoriteOnly = false;
 
   @override
@@ -33,15 +31,15 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               PopupMenuItem(
                 child: Text('Somente Favoritos'),
                 value: FilterOptions.Favorite,
-                ),
+              ),
               PopupMenuItem(
-              child: Text('Todos'),
-              value: FilterOptions.All,
+                child: Text('Todos'),
+                value: FilterOptions.All,
               ),
             ],
-            onSelected: (FilterOptions selectedValue){
+            onSelected: (FilterOptions selectedValue) {
               setState(() {
-                if(selectedValue == FilterOptions.Favorite){
+                if (selectedValue == FilterOptions.Favorite) {
                   // provider.showFavoriteOnly(); //Controle GLOBAL do estado FAVORITO - Usando interface do tipo Statelees
                   _showFavoriteOnly = true;
                 } else {
@@ -49,13 +47,23 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   _showFavoriteOnly = false;
                 }
               });
-
-
             },
+          ),
+          Consumer<Cart>(
+            child: IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: (){},
+              ),
+            builder: (ctx, cart, child) => Badgee(
+              value: cart.itemsCount.toString(),
+              child: child!,
+            ),
           ),
         ],
       ),
-      body: ProductGrid(showFavoriteOnly: _showFavoriteOnly,),
+      body: ProductGrid(
+        showFavoriteOnly: _showFavoriteOnly,
+      ),
     );
   }
 }
